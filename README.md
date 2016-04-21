@@ -63,7 +63,7 @@ delphes_path = <your Delphes directory>
 
 ### Generating events :
 * First edit the `config` file and set your username, process and your Madgraph directory path. 
-Feel free to edit the `MGrun.sh` to set your run time, memory usage, etc. I have already set them to optimal values
+Feel free to edit `MGrun.sh` to set your run time, memory usage, etc. I have already set them to optimal values
 * To generate events, do :
 ```
 sbatch MGrun.sh
