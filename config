@@ -13,7 +13,7 @@ username = pjaiswal
 #  tB (for single top + W/Z) 
 #  Bj (for W/Z + jets Bj)
 #  jj (for QCD)  
-process = test # top-pair 
+process = tt # top-pair 
 #
 #
 #
