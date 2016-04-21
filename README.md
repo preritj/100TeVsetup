@@ -1,3 +1,12 @@
+### Downloading files from github :
+* Create a directory for project and download all the files. Follow these steps :
+```
+mkdir 100TeV
+cd 100TeV
+module load git
+git pull https://github.com/preritj/100TeVsetup.git
+```
+
 ### Installing Madgraph :
 * Download madgraph from the web : 
 ```
