@@ -20,11 +20,11 @@ tar -zxvf MG5_aMC_v2.3.3.tar.gz
 cp Madgraph/* <your_Madgraph_directory>/ 
 ``` 
 
-* Finally check that everything works by doing in <your_Madgraph_directory>:
+* Finally check that everything works. Go to <your_Madgraph_directory> and try:
 ```
 ./bin/mg5_aMC
 ```
-and try a simple test process : 
+and test a simple test process : 
 ```
 generate p p > z
 output test
