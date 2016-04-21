@@ -1,0 +1,21 @@
+# your username 
+# options are :
+# pjaiswal (for Prerit)
+# jfan2  (for JiJi)
+# sl171  (for John) 
+username = pjaiswal
+#
+#
+# process you want to generate
+# options are :
+#  tt (for top-pair) 
+#  ttB (for ttbar +W/Z)
+#  tB (for single top + W/Z) 
+#  Bj (for W/Z + jets Bj)
+#  jj (for QCD)  
+process = test # top-pair 
+#
+#
+#
+#specify the path of madgraph directory (which contains bin diretcory)
+MGpath = /users/pjaiswal/Physics/MadGraph/MG5 
