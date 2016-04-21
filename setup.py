@@ -43,7 +43,8 @@ add process p p > V j j j @2""" ,
 "tB"	:
 """define X = t t~
 define V = w+ w- z a
-generate p p > X V j @0
+generate p p > X V @0
+generate p p > X V j @1
 add process p p > X V j j @2""" ,
 
 "test"	:
