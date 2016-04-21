@@ -20,7 +20,7 @@ tar -zxvf MG5_aMC_v2.3.3.tar.gz
 cp Madgraph/* <your_Madgraph_directory>/ 
 ``` 
 
-* Finally check that everything works. Go to <your_Madgraph_directory> and try:
+* Finally check that everything works. Go to `<your_Madgraph_directory>` and try:
 ```
 ./bin/mg5_aMC
 ```
