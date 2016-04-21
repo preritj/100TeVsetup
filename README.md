@@ -76,5 +76,5 @@ myq
 ```
 tail -100 MGrun.out
 ```
-
+* The root files will be stored in `data/<username>/100TeV/`
 
