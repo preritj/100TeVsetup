@@ -38,7 +38,8 @@ install pythia-pgs
 ```
 
 ### Installing Delphes :
-*First, we need to install `tcl` 
+
+* First, we need to install `tcl` 
 ```
 wget http://prdownloads.sourceforge.net/tcl/tcl8.6.5-src.tar.gz
 tar -zxvf tcl8.6.5-src.tar.gz
@@ -49,6 +50,16 @@ cd tcl8.6.5/unix
 ./configure --prefix=<install_directory>
 make 
 make install
+```
+
+* Add `tcl` path to bashrc. Open `~/.bashrc` and add following lines to the file :
+```
+export PATH=<your_tcl_install_directory>/bin:$PATH
+export LD_LIBRARY_PATH=<your_tcl_install_directory>/lib:$LD_LIBRARY_PATH
+``` 
+Close the file and do 
+```
+source ~/.bashrc
 ```
 
 * Next we want to install Delphes, but outside Madgraph to get the latest version. Do the following steps *outside* of your Madgraph directory :
