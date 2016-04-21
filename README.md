@@ -4,6 +4,7 @@
 mkdir 100TeV
 cd 100TeV
 module load git
+git init
 git pull https://github.com/preritj/100TeVsetup.git
 ```
 
