@@ -72,7 +72,7 @@ sbatch MGrun.sh
 ```
 myq
 ``` 
-* You can have a look at the status of your run using :
+* You can have a look at the status of your run using the following command from your `100TeV` project directory :
 ```
 tail -100 MGrun.out
 ```
