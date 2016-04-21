@@ -17,7 +17,7 @@ tar -zxvf MG5_aMC_v2.3.3.tar.gz
 
 * To include S<sub>T</sub>  cut, some madgraph files need to be modified. I have placed these modified files (with paths) in `MadGraph` directory, replace your original MadGraph files with the ones included here. You can do this in one step as follows from your `100TeV` project directory:
 ```
-cp Madgraph/* <your_Madgraph_directory>/ 
+cp -r Madgraph/* <your_Madgraph_directory>/ 
 ``` 
 
 * Finally check that everything works. Go to `<your_Madgraph_directory>` and try:
