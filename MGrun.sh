@@ -21,9 +21,3 @@
 module load root/5.34
 
 python MGrun.py
-#../tt/MG/bin/madevent run.cmd
-#../tt/MG/bin/generate_events -f
-# ./data/pjaiswal/test/bin/generate_events << EOF
-# 0
-# 0
-# EOF
