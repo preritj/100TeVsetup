@@ -93,6 +93,7 @@ with open(PythiaCard,'a') as f:
 # Run madgraph -- generate events
 def RunMG() :
 	call("rm -r "+os.path.join(MGoutDIR, "Events", "run_*"),shell=True)
+	call("rm -r "+os.path.join(MGoutDIR, "RunWeb"),shell=True)
 	MGrun = os.path.join(MGoutDIR, "bin", "madevent")
 	for HTbin in HTbins :
 		DIR=os.path.join(OutDIR, HTbin)
