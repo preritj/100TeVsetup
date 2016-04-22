@@ -102,4 +102,9 @@ tail -100 MGrun.out
 ```
 * The root files will be stored in `data/<username>/100TeV/`
 * In case the runs are not completed in time, rerun the `MGrun.sh` script. It will resume event generation from the previous run.
+To cancel a job :
+```
+scancel <job_ID>
+```
+where `<job_ID>` can be viewed by issuing the command `myq`
 
