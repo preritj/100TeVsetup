@@ -6,6 +6,7 @@ from subprocess import call, check_output
 username=None
 process=None
 MGDIR=None
+nEvents=None
 
 #=======================================================================
 # Read config file
@@ -25,6 +26,7 @@ for line in lines:
 	if tag == "username" : username = l[1].strip()
 	elif tag == "process" : process = l[1].strip()
 	elif tag == "MGpath" : MGDIR = (l[1].strip()).rstrip(str(os.sep))
+	elif tag == "nEvents" : nEvents = int(l[1].strip())
 
 # Check if config parameters are valid 
 if not username :
@@ -35,6 +37,9 @@ if (not process) or (process not in processes) :
 	sys.exit()
 if (not MGDIR) or (not os.path.exists(MGDIR)):
 	print "Could not locate Madgraph directory, aborting..."
+	sys.exit()
+if (not nEvents) or (nEvents<=0):
+	print "Invalid number of events requested, aborting..."
 	sys.exit()
 	
 #======================================================================
@@ -75,15 +80,6 @@ call("cp "+os.path.join("Cards","*.dat")+" "+
 qcut = QCUT[process]
 MGrun = os.path.join(MGoutDIR, "bin", "madevent")
 cmdFile = "MGrun.cmd"
-f=open(cmdFile, 'w')
-f.write("generate_events\n")
-#f.write("  set nevents 100\n") #debug 
-f.write("  set ptj "+str(qcut)+"\n")
-f.write("  set ptb "+str(qcut)+"\n")
-f.write("  set mmjj "+str(qcut)+"\n")
-f.write("  set mmbb "+str(qcut)+"\n")
-f.write("  set xqcut "+str(qcut)+"\n")
-f.close()
 PythiaCard = os.path.join(MGoutDIR,"Cards","pythia_card.dat")
 with open(PythiaCard,'a') as f:
 	f.write("      QCUT = "+str(qcut)+"\n")
@@ -97,16 +93,32 @@ def RunMG() :
 	MGrun = os.path.join(MGoutDIR, "bin", "madevent")
 	for HTbin in HTbins :
 		DIR=os.path.join(OutDIR, HTbin)
-		for i in range(6):
-			tag=str(i+1).zfill(3)
+		eventsCount = 0
+		i=0
+		while eventsCount < nEvents:
+			i=i+1
+			tag=str(i).zfill(3)
 			rootfile=os.path.join(DIR, tag+'.root')
 			txtfile=os.path.join(DIR, tag+'.txt')
-			if os.path.isfile(rootfile) :
+			if os.path.isfile(rootfile) and os.path.isfile(txtfile):
+				f = open(txtfile,'r')
+				lines=f.readlines()
+				f.close()
+				for line in lines :
+					if "All included" in line :
+						eventsCount += int(line.split("I")[2].split()[0])
 				continue
 			STmin, STmax = HTbin.split("-")
-			with open(cmdFile, 'a') as f:
-				f.write("  set STmin "+STmin)
-				f.write("  set STmax "+STmax)
+			with open(cmdFile, 'w') as f:
+				f.write("generate_events\n")
+				#f.write("  set nevents 100\n") #debug 
+				f.write("  set ptj "+str(qcut)+"\n")
+				f.write("  set ptb "+str(qcut)+"\n")
+				f.write("  set mmjj "+str(qcut)+"\n")
+				f.write("  set mmbb "+str(qcut)+"\n")
+				f.write("  set xqcut "+str(qcut)+"\n")
+				f.write("  set STmin "+STmin+'\n')
+				f.write("  set STmax "+STmax+'\n')
 			call([MGrun, cmdFile])
 			RunDIR=os.path.join(MGoutDIR, "Events", "run_01")
 			PythiaLogFile=os.path.join(RunDIR,"tag_1_pythia.log")
@@ -114,7 +126,10 @@ def RunMG() :
 			PythiaLog=check_output(["tail","-24",PythiaLogFile])
 			call(["mv", RootFile, rootfile])
 			f=open(txtfile,'w')
-			f.write(PythiaLog)
+			for line in PythiaLog.splitlines():
+				f.write(line+'\n')
+				if "All included" in line :
+					eventsCount += int(line.split("I")[2].split()[0])
 			f.close()
 			call(["rm", "-r", RunDIR])
 
